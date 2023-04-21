@@ -1,9 +1,17 @@
+// IMPORTS
 const express = require("express");
+const projectsRouter = require("./projects/projects-router");
+const actionsRouter = require("./actions/actions-router");
+
+// Initialize express server
 const server = express();
 
-// Sunucunuzu yapılandırın
-// Eylem routerınızı /api/actions/actions-router.js içinde oluşturun
-// Proje roterlarınızı /api/projects/projects-router.js içinde oluşturun
-// Bu dosyanın içinde `server.listen()` YAPMAYIN!
+// GLOBAM MIDDLEWARE
+server.use(express.json());
 
+// API
+server.use("/api/projects", projectsRouter);
+server.use("/api/actions", actionsRouter);
+
+// EXPORT
 module.exports = server;
