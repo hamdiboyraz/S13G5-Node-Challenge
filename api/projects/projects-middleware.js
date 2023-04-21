@@ -1,4 +1,3 @@
-// projects ara yazılımları buraya
 const projectsController = require("./projects-model");
 
 function validateProject(req, res, next) {
@@ -9,6 +8,13 @@ function validateProject(req, res, next) {
       return res.status(400).json({
         message: "Please fill in all fields.",
       });
+    }
+    if (completed) {
+      if (typeof completed !== "boolean") {
+        return res.status(400).json({
+          message: "Completed field must be a boolean value.",
+        });
+      }
     }
     next();
   } catch (err) {
@@ -24,7 +30,7 @@ async function validateProjectID(req, res, next) {
     if (!project) {
       return res.status(404).json({ message: "Project not found!" });
     }
-    req.project = project;
+    // req.project = project;
     next();
   } catch (err) {
     console.log(err);

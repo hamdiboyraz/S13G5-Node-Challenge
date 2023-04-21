@@ -27,8 +27,12 @@ projectsRouter.post(
   projectsMiddleware.validateProject,
   async (req, res, next) => {
     try {
-      const { name, description } = req.body;
-      const newProject = await projectsController.insert({ name, description });
+      const { name, description, completed } = req.body;
+      const newProject = await projectsController.insert({
+        name,
+        description,
+        completed,
+      });
       res.status(201).json(newProject);
     } catch (error) {
       console.log(error);
